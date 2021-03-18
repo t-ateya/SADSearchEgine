@@ -1,6 +1,8 @@
 import * as Element from "../viewpage/element.js";
 import * as FirebaseController from "./firebase_controller.js";
 
+export let currentUser
+
 export function addEventListeners() {
   Element.formSignin.addEventListener("submit", async (e) => {
     e.preventDefault;
@@ -18,15 +20,15 @@ export function addEventListeners() {
     if (user){
       currentUser = user
       let elements = document.getElementsByClassName('modal-menus-pre-auth')
-      for (let i = 0; i<elements.length; i++) elements[i].getElementsByClassName.display = 'none'
+      for (let i = 0; i<elements.length; i++) elements[i].style.display = 'none'
       elements = document.getElementsByClassName('modal-menus-post-auth')
-      for (let i = 0; i < elements.length; i++) elements[i].getElementsByClassName.display = 'block'
+      for (let i = 0; i < elements.length; i++) elements[i].style.display = 'block'
     }else {
       currentUser = null
       let elements = document.getElementsByClassName('modal-menus-pre-auth')
-      for (let i = 0; i<elements.length; i++) elements[i].getElementsByClassName.style.display = 'block'
+      for (let i = 0; i<elements.length; i++) elements[i].style.display = 'block'
       elements = document.getElementsByClassName('modal-menus-post-auth')
-      for (let i = 0; i < elements.length; i++) elements[i].getElementsByClassName.style.display = 'none'
+      for (let i = 0; i < elements.length; i++) elements[i].style.display = 'none'
     }
 
 
