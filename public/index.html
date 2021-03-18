@@ -42,10 +42,10 @@
             <button class="btn btn-outline-danger" data-toggle="modal" data-target="#modal-signin-form">Sign In</button>
           </li>
           <li class="nav-item modal-menus-post-auth">
-            <button class="btn btn-outline-primary">Home</button>
+            <button id="menu-home" class="btn btn-outline-primary">Home</button>
           </li>
           <li class="nav-item modal-menus-post-auth">
-            <button class="btn btn-outline-primary">About</button>
+            <button id="menu-about" class="btn btn-outline-primary">About</button>
           </li>
           <li class="nav-item modal-menus-post-auth">
             <button id="menu-signout" class="btn btn-outline-danger">Sign Out</button>
@@ -106,6 +106,8 @@
         </div>
       </div>
     </div>
+
+    <div id="main-content" class="jumbotron"></div>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/8.3.0/firebase-app.js"></script>

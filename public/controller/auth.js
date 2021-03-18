@@ -1,5 +1,6 @@
-import * as Element from "../viewpage/element.js";
-import * as FirebaseController from "./firebase_controller.js";
+import * as Element from '../viewpage/element.js'
+import * as FirebaseController from './firebase_controller.js'
+import * as Constant from '../model/constant.js'
 
 export let currentUser;
 
@@ -11,6 +12,8 @@ export function addEventListeners() {
 
     try {
       await FirebaseController.signIn(email, password);
+      //dismiss signin modal 
+      $('#' + Constant.iDmodalSigninForm).modal('hide')
     } catch (e) {
       console.log(e);
     }
