@@ -1,4 +1,4 @@
-import * as Element from '../viewpage/element'
+import * as Element from '../viewpage/element.js'
 
 export function addEventListeners(){
     Element.menuHome.addEventListener('click', ()=>{
@@ -7,6 +7,6 @@ export function addEventListeners(){
 
 }
 
-function home_page(){
+export function home_page(){
     Element.mainContent.innerHTML = '<h1>Home Page </h1>'
 }
