@@ -1,7 +1,9 @@
-import * as Element from '../viewpage/element'
+import * as Element from '../viewpage/element.js'
+import * as Routes from '../controller/routes.js'
 
 export function addEventListeners(){
     Element.menuAbout.addEventListener('click', ()=>{
+        history.pushState(null, null, Routes.routePath.ABOUT)
         about_page()
     })
 

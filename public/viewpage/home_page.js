@@ -1,7 +1,9 @@
 import * as Element from '../viewpage/element.js'
+import * as Routes from '../controller/routes.js'
 
 export function addEventListeners(){
     Element.menuHome.addEventListener('click', ()=>{
+        history.pushState(null, null, Routes.routePath.HOME)
         home_page()
     })
 

@@ -16,6 +16,13 @@ window.onload = () => {
   //if (pathname == "/") Home.home_page()
   //else if (pathname == '/about') About.about_page()
   Routes.routing(pathname, href)
-  
 
-};
+}
+
+window.addEventListener('popstate', e =>{
+  e.preventDefault()
+  const pathname = e.target.location.pathname
+  const href = e.target.location.href
+  Routes.routing(pathname, href)
+
+})
