@@ -8,6 +8,12 @@ export const formSignin = document.getElementById('form-signin')
 //main content of each page
 export const mainContent = document.getElementById('main-content')
 
+export const popupInfo = document.getElementById('modal-popupInfo')
+
+export const popupInfoTitle = document.getElementById('modal-popupinfo-title')
+export const popupInfoBody = document.getElementById('modal-popupinfo-body')
+
+
 
 
 
