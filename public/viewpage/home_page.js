@@ -12,7 +12,7 @@ export function addEventListeners(){
         history.pushState(null, null, Routes.routePath.HOME)
         home_page()
     })
-    Element.formCreateThread.addEventListener('submit', e=>{
+    Element.formCreateThread.addEventListener('submit', async e=>{
         e.preventDefault()
         const uid = Auth.currentUser.uid
         const email = Auth.currentUser.email
