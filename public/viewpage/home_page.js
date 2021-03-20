@@ -3,6 +3,7 @@ import * as Routes from '../controller/routes.js'
 import * as Auth from '../controller/auth.js'
 import * as Constant from '../model/constant.js'
 import {Thread} from '../model/thread.js'
+import * as  FirebaseController from '../controller/firebase_controller.js'
 
 
 
@@ -23,6 +24,13 @@ export function addEventListeners(){
         const thread = new Thread(
             {uid, email, title, keywordsArray, content, timestamp}
         )
+        try {
+            const docId = await FirebaseController.addThread(thread)
+            thread.docId = docId
+        } catch (e) {
+            console.log(e)
+            
+        }
     })
 }
 
