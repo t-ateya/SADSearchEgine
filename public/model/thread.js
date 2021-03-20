@@ -12,10 +12,10 @@ export class Thread{
         return {
             uid: this.uid,
             email: this.email,
-            title = this.title,
-            timestamp = this.timestamp,
-            content = this.content,
-            keywordsArray = this.keywordsArray
+            title: this.title,
+            timestamp: this.timestamp,
+            content: this.content,
+            keywordsArray: this.keywordsArray
         }
     }
 }
