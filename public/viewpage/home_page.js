@@ -1,6 +1,8 @@
 import * as Element from '../viewpage/element.js'
 import * as Routes from '../controller/routes.js'
 import * as Auth from '../controller/auth.js'
+import * as Constant from '../model/constant.js'
+
 
 
 export function addEventListeners(){
@@ -17,5 +19,7 @@ export function home_page(){
         return 
     }
 
-    Element.mainContent.innerHTML = '<h1>Home Page </h1>'
+    Element.mainContent.innerHTML = `
+        <button class="btn btn-danger" data-toggle="modal" data-target="#${Constant.iDmodalCreateNewThread}">+ New Thread </button>
+    `
 }
