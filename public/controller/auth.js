@@ -7,7 +7,7 @@ import * as Routes from './routes.js'
 export let currentUser;
 
 export function addEventListeners() {
-  Element.formSignin.addEventListener("submit", async (e) => {
+  Element.formSignin.addEventListener('submit', async (e) => {
     e.preventDefault;
     const email = Element.formSignin.email.value;
     const password = Element.formSignin.password.value;
@@ -23,7 +23,7 @@ export function addEventListeners() {
     }
   });
 
-  Element.menuSignout.addEventListener("click", async() => {
+  Element.menuSignout.addEventListener('click', async() => {
     try {
       await FirebaseController.signOut()
     } catch (error) {
@@ -34,12 +34,12 @@ export function addEventListeners() {
   firebase.auth().onAuthStateChanged(user=> {
     if (user) {
       currentUser = user;
-      let elements = document.getElementsByClassName("modal-menus-pre-auth");
+      let elements = document.getElementsByClassName('modal-menus-pre-auth')
       for (let i = 0; i < elements.length; i++)
         elements[i].style.display = 'none';
-      elements = document.getElementsByClassName("modal-menus-post-auth");
+      elements = document.getElementsByClassName('modal-menus-post-auth')
       for (let i = 0; i < elements.length; i++)
-        elements[i].style.display = 'block';
+        elements[i].style.display = 'block'
 
         //routing : for page reloading
         const pathname = window.location.pathname
@@ -48,10 +48,10 @@ export function addEventListeners() {
 
     } else {
       currentUser = null;
-      let elements = document.getElementsByClassName("modal-menus-pre-auth");
+      let elements = document.getElementsByClassName('modal-menus-pre-auth');
       for (let i = 0; i < elements.length; i++)
         elements[i].style.display = 'block';
-      elements = document.getElementsByClassName("modal-menus-post-auth");
+      elements = document.getElementsByClassName('modal-menus-post-auth');
       for (let i = 0; i < elements.length; i++)
         elements[i].style.display = 'none';
 

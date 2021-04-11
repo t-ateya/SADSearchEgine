@@ -42,6 +42,10 @@ export async function home_page(){
         return 
     }
 
+    Element.mainContent.innerHTML = `
+    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#${Constant.iDmodalCreateNewThread}">+ New Thread </button>
+    `
+
     let threadList
     try {
         threadList = await FirebaseController.getThreadlist()
