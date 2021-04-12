@@ -27,10 +27,18 @@ export function addEventListeners(){
         try {
             const docId = await FirebaseController.addThread(thread)
             thread.docId = docId
-            home_page() //we will improve later
+            //home_page() //we will improve later
+            const trTag = document.createElement('tr')// creates <tr> ... </tr> -blank tag
+            trTag.innerHTML = buildThreadView(thread)  //content between two tags
+            const threadBodyTag = document.getElementById('thread-body-tag')
+            threadBodyTag.prepend(trTag)
+            Element.formCreateThread.reset()
+
+
             Util.popupInfo('Success', 'A new thread has been added', Constant.iDmodalCreateNewThread)
         } catch (e) {
-            console.log(e)
+            if (Constant.DEV) console.log(e)
+            Util.popupInfo('Failed to add', JSON.stringify(e))
             
         }
     })
@@ -49,7 +57,8 @@ export async function home_page(){
      try {
        threadList = await FirebaseController.getThreadlist()
     } catch (e) {
-        console.log(e)
+        if (Constant.DEV) console.log(e)
+        Util.popupInfo('Error to get thread', JSON.stringify(e))
     }
 
     Element.mainContent.innerHTML += `
@@ -64,11 +73,11 @@ export async function home_page(){
         <th scope="col">Posted At</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="thread-body-tag">
     `
 
     threadList.forEach(thread =>{
-        Element.mainContent.innerHTML += buildThreadView(thread)
+        Element.mainContent.innerHTML += '<tr>' + buildThreadView(thread) + '</tr>'
     })
 
     Element.mainContent.innerHTML += `
@@ -82,13 +91,16 @@ export async function home_page(){
 
 function buildThreadView(thread){
     return `
-        <tr>
-            <td>View</td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="threadId" value="${thread.docId}"
+                    <button type="submit" class="btn btn-outline-primary">View</button>
+                </form>
+            </td>
             <td>${thread.title}</td>
             <td>${thread.keywordsArray.join('')}</td>
             <td>${thread.email}</td>
             <td>${thread.content}</td>
             <td>${new Date(thread.timestamp).toString()}</td>
-        </tr>
     `
 }
