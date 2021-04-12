@@ -20,9 +20,9 @@ export function addEventListeners(){
         const title = Element.formCreateThread.title.value
         const content = Element.formCreateThread.content.value
         const keywords = Element.formCreateThread.keywords.value
-        const keywordsArray = keywords.toLowerCase().match(/\s+/g)
+        const keywordsArray = keywords.toLowerCase().match(/\S+/g)
         const thread = new Thread(
-            {uid, email, title, keywordsArray, content, timestamp}
+            {uid, email, title, timestamp, content, keywordsArray }
         )
         try {
             const docId = await FirebaseController.addThread(thread)
@@ -42,42 +42,42 @@ export async function home_page(){
         return 
     }
 
-    Element.mainContent.innerHTML = `
-    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#${Constant.iDmodalCreateNewThread}">+ New Thread </button>
-    `
-
+     Element.mainContent.innerHTML = `
+            <button class="btn btn-danger" data-toggle="modal" data-target="#${Constant.iDmodalCreateNewThread}">+ New Thread </button>
+        `
     let threadList
-    try {
-        threadList = await FirebaseController.getThreadlist()
+     try {
+       threadList = await FirebaseController.getThreadlist()
     } catch (e) {
         console.log(e)
     }
 
-    let html = `
-        <button class="btn btn-danger" data-toggle="modal" data-target="#${Constant.iDmodalCreateNewThread}">+ New Thread </button>
-    `
-    html += `
+    Element.mainContent.innerHTML += `
     <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">Action</th>
         <th scope="col">Title</th>
-        <th scope="col">Keywords</th>
-        <th scope="col">Posted</th>
+        <th scope="col">KeyWords</th>
+        <th scope="col">Posted By</th>
         <th scope="col">Content</th>
         <th scope="col">Posted At</th>
       </tr>
     </thead>
     <tbody>
     `
+
     threadList.forEach(thread =>{
-        html += buildThreadView(thread)
+        Element.mainContent.innerHTML += buildThreadView(thread)
     })
 
-    html += `
+    Element.mainContent.innerHTML += `
         </tbody></table>
     `
-    Element.mainContent.innerHTML = html
+   //Element.mainContent.innerHTML = html
+    
+
+    
 }
 
 function buildThreadView(thread){
