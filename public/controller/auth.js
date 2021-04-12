@@ -14,7 +14,7 @@ export function addEventListeners() {
 
     try {
       await FirebaseController.signIn(email, password);
-      //dismiss signin modal 
+      //Let's dismiss signin modal 
       $('#' + Constant.iDmodalSigninForm).modal('hide')
     } catch (e) {
       console.log(e);
