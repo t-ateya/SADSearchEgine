@@ -5,6 +5,7 @@ import * as Constant from '../model/constant.js'
 import {Thread} from '../model/thread.js'
 import * as  FirebaseController from '../controller/firebase_controller.js'
 import * as Util from './util.js'
+import * as ThreadPage from './thread_page.js'
 
 
 export function addEventListeners(){
@@ -84,6 +85,8 @@ export async function home_page(){
         </tbody></table>
     `
    //Element.mainContent.innerHTML = html
+
+   ThreadPage.addThreadViewEvents()
     
 
     
@@ -92,7 +95,7 @@ export async function home_page(){
 function buildThreadView(thread){
     return `
             <td>
-                <form method="post">
+                <form method="post" class="thread-view-form">
                     <input type="hidden" name="threadId" value="${thread.docId}"
                     <button type="submit" class="btn btn-outline-primary">View</button>
                 </form>

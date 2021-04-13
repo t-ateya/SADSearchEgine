@@ -30,3 +30,12 @@ export async function getThreadlist(){
     return threadList
 
 }
+
+export async function getOneThread (threadId){
+    const ref = await firebase.firestore().collection(Constant.collectionName.THREADS)
+                      .doc(threadId).get() 
+                      
+    const t = new Thread(ref.data())
+    t.docId = threadId
+    return t
+}
