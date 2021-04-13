@@ -53,18 +53,27 @@ export async function home_page(){
         return 
     }
 
-     Element.mainContent.innerHTML = `
-            <button class="btn btn-danger" data-toggle="modal" data-target="#${Constant.iDmodalCreateNewThread}">+ New Thread </button>
-        `
     let threadList
-     try {
+    try {
        threadList = await FirebaseController.getThreadlist()
     } catch (e) {
         if (Constant.DEV) console.log(e)
         Util.popupInfo('Error to get thread', JSON.stringify(e))
+        return
+    }
+    buildHomeScreen(threadList, true)
+}
+
+export function buildHomeScreen(threadList, newButton){
+
+    let html = ''
+    if (newButton){
+        html = `
+        <button class="btn btn-danger" data-toggle="modal" data-target="#${Constant.iDmodalCreateNewThread}">+ New Thread </button>
+        `
     }
 
-    Element.mainContent.innerHTML += `
+    html += `
     <table class="table table-striped">
     <thead>
       <tr>
@@ -80,18 +89,15 @@ export async function home_page(){
     `
 
     threadList.forEach(thread =>{
-        Element.mainContent.innerHTML += '<tr>' + buildThreadView(thread) + '</tr>'
+        html += '<tr>' + buildThreadView(thread) + '</tr>'
     })
 
-    Element.mainContent.innerHTML += `
+    html += `
         </tbody></table>
     `
-   //Element.mainContent.innerHTML = html
+   Element.mainContent.innerHTML = html
 
-   ThreadPage.addThreadViewEvents()
-    
-
-    
+   ThreadPage.addThreadViewEvents() 
 }
 
 function buildThreadView(thread){
