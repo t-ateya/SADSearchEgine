@@ -63,3 +63,17 @@ export async function getMessageList(threadId){
     })
     return messages 
 }
+
+export async function searchThreads(keywordsArray){
+    const threadList = []
+    const snapShot = await firebase.firestore().collection(Constant.collectionName.THREADS)
+                      .where('keywordsArray', 'array-contains-any', keywordsArray)
+                      .orderBy('timestamp', 'desc')
+                      .get()
+    snapShot.forEach(doc =>{
+        const t = new Thread(doc.data())
+        t.docId = doc.id
+        threadList.push(t)
+    })
+    return threadList
+}

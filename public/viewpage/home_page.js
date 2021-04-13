@@ -21,7 +21,7 @@ export function addEventListeners(){
         const title = Element.formCreateThread.title.value
         const content = Element.formCreateThread.content.value
         const keywords = Element.formCreateThread.keywords.value
-        const keywordsArray = keywords.toLowerCase().match(/\s+/g)
+        const keywordsArray = keywords.toLowerCase().match(/\S+/g)
         const thread = new Thread(
             {uid, email, title, timestamp, content, keywordsArray }
         )
