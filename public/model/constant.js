@@ -6,4 +6,6 @@ export const iDmodalCreateNewThread = 'modal-create-thread-form'
 
 export const collectionName ={
     THREADS: 'threads',
+    MESSAGE: 'message'
 }
+
