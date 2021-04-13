@@ -21,7 +21,7 @@ export function addEventListeners(){
         const title = Element.formCreateThread.title.value
         const content = Element.formCreateThread.content.value
         const keywords = Element.formCreateThread.keywords.value
-        const keywordsArray = keywords.toLowerCase().match(/\S+/g)
+        const keywordsArray = keywords.toLowerCase().match(/\s+/g)
         const thread = new Thread(
             {uid, email, title, timestamp, content, keywordsArray }
         )
@@ -33,6 +33,8 @@ export function addEventListeners(){
             trTag.innerHTML = buildThreadView(thread)  //content between two tags
             const threadBodyTag = document.getElementById('thread-body-tag')
             threadBodyTag.prepend(trTag)
+            const threadForms = document.getElementsByClassName('thread-view-form');
+            ThreadPage.addThreadFormEvent(threadForms[0])
             Element.formCreateThread.reset()
 
 

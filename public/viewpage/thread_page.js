@@ -10,21 +10,35 @@ import * as Routes from '../controller/routes.js'
 
 export function addThreadViewEvents(){
     const viewForms = document.getElementsByClassName('thread-view-form')
-    for (let n = 0; n<viewForms.length; n++){
-        viewForms[n].addEventListener('submit', e=> {
-            e.preventDefault()
-            const threadId = e.target.threadId.value
-            history.pushState(null, null, Routes.routePath.THREAD + '#' + threadId)
-            thread_page(threadId)
-
-        })
+    for (let n =0; n<viewForms.length; n++){
+        addThreadFormEvent(viewForms[n])
     }
+}
+
+export function addThreadFormEvent(form){
+    form.addEventListener('submit', async e=> { 
+        e.preventDefault()
+        const button = e.target.getElementsByTagName('button')[0]
+        const label = Util.disableButton(button)
+        const threadId = e.target.threadId.value
+        history.pushState(null, null, Routes.routePath.THREAD + '#' + threadId)
+        thread_page(threadId)
+
+        //await Until.sleep(1000)
+        Util.enableButton(button, label)
+
+    })
 }
 
 export async function thread_page(threadId){
     if (!Auth.currentUser){
         Element.mainContent.innerHTML = '<h1>Protected Page </h1>'
         return 
+    }
+
+    if (!threadId){
+        Util.popupInfo('Error', 'Invalid access to Thread')
+        return
     }
 
     //1. get thread from Firestore by threadId
@@ -37,6 +51,10 @@ export async function thread_page(threadId){
       
     try{
         thread = await FirebaseController.getOneThread(threadId) //read threads
+        if (!thread){
+            Util.popupInfo('Error', 'Thread does not exists')
+            return 
+        }
         messages = await FirebaseController.getMessageList(threadId)
     }catch (e){
         if (Constant.DEV) console.log(e)
