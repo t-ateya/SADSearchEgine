@@ -95,9 +95,13 @@ export function buildHomeScreen(threadList, newButton){
     html += `
         </tbody></table>
     `
-   Element.mainContent.innerHTML = html
+    if (threadList.length ==0){
+        html += '<h4>No Thread Found!</h4>'
+    }
 
-   ThreadPage.addThreadViewEvents() 
+    Element.mainContent.innerHTML = html
+
+    ThreadPage.addThreadViewEvents() 
 }
 
 function buildThreadView(thread){
