@@ -14,7 +14,7 @@ export const routes = [
     {path: routePath.HOME, page: Home.home_page},
     {path: routePath.ABOUT, page: About.about_page},
     {path: routePath.THREAD, page: ThreadPage.thread_page},
-    {path: routePath.SEARCH, page: search.search_page}
+    {path: routePath.SEARCH, page: Search.search_page}
 
 ]
 

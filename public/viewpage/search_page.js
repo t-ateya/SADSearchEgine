@@ -4,6 +4,7 @@ import * as Auth from "../controller/auth.js";
 import * as FirebaseController from "../controller/firebase_controller.js";
 import * as Constant from "../model/constant.js";
 import * as Home from "./home_page.js";
+import * as Routes from '.controller/routes.js'
 
 export function addEventListeners() {
     Element.formSearch.addEventListener("submit", (e) => {
@@ -39,4 +40,9 @@ export async function search_page(keywordsArray) {
     }
 
     Home.buildHomeScreen(threadList)
+    if (threadList.length > 0){
+      const joinedSearchKeys = keywordsArray.join('')
+      history.pushState(null, null, Routes.routePath.SEARCH + '#' +joinedSearchKeys)
+
+    }
 }
